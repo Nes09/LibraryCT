@@ -16,7 +16,6 @@ public class LoginAsLibrarian {
         ArrayList<String> userNames = new ArrayList<>(Arrays.asList("librarian43@library", "librarian18@library"));
 
         for (String name : userNames) {
-
             //Given librarian is on the loginPage
         WebDriverManager.chromedriver().setup();
         WebDriver driver = new ChromeDriver();
@@ -34,8 +33,6 @@ public class LoginAsLibrarian {
             System.out.println("Expected Title = " + expectedTitle);
             System.out.println("Actual Title = " + actualTitle);
         }
-
-
             //When librarian enters valid email address and password
             WebElement email = driver.findElement(By.id("inputEmail"));
             email.sendKeys(name);
@@ -66,14 +63,9 @@ public class LoginAsLibrarian {
                 index++;
             }
 
-
             driver.close();
-
         }
-
-
     }
-
 }
 /*
 Given librarian is on the loginPage
