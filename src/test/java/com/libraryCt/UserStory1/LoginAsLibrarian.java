@@ -1,4 +1,4 @@
-package com.libraryCt;
+package com.libraryCt.UserStory1;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
@@ -28,11 +28,11 @@ public class LoginAsLibrarian {
             System.out.println("actualTitle = " + actualTitle);
 
             if (expectedTitle.equals(actualTitle)) {
-            System.out.println("Title verification Pass!");
+            System.out.println("Title verification Passed!");
         } else {
             System.out.println("Title verification Failed!!!");
-            System.out.println("expectedTitle = " + expectedTitle);
-            System.out.println("actualTitle = " + actualTitle);
+            System.out.println("Expected Title = " + expectedTitle);
+            System.out.println("Actual Title = " + actualTitle);
         }
 
 
@@ -42,37 +42,30 @@ public class LoginAsLibrarian {
             System.out.println("Librarian userName = " + name);
             //password
             String password = "Sdet2022*";
-            driver.findElement(By.id("inputPassword")).sendKeys("Sdet2022*");
+            driver.findElement(By.id("inputPassword")).sendKeys(password);
             System.out.println("password = " + password);
 
             //And librarian click sign in button
            driver.findElement(By.cssSelector("#login-form > button")).click();
-            
-            //Then verify that there are 3 models on the page
-            Thread.sleep(3000);
 
-            //
+            //Then verify that there are 3 models on the page
+            Thread.sleep(3000); //needs to wait until page load and we can locate the title!
+
             List<WebElement> titles = driver.findElements(By.xpath("//li[@class='nav-item']"));
             System.out.println("titles.size() = " + titles.size());
 
-
-            if (driver.findElement(By.linkText("Dashboard")).getText().equals("Dashboard")) {
-                System.out.println("Title verification passed: " + driver.findElement(By.linkText("Dashboard")).getText());
-            } else {
-                System.out.println("Title verification failed");
+            ArrayList<String> title  = new ArrayList<>(Arrays.asList("Dashboard","Users", "Books"));
+            int index = 0;
+            for (WebElement element : titles) {
+                if(element.getText().equals(title.get(index))){
+                    System.out.println("Title verification Passed: \nExpected result = " + element.getText());
+                } else {
+                    System.out.println("Title verification Failed!!!");
+                    System.out.println("Expected title = "+element.getText());
+                }
+                index++;
             }
 
-            if (driver.findElement(By.linkText("Users")).getText().equals("Users")) {
-                System.out.println("Title verification passed: " + driver.findElement(By.linkText("Users")).getText());
-            } else {
-                System.out.println("Title verification failed!!!");
-            }
-
-            if (driver.findElement(By.linkText("Books")).getText().equals("Books")) {
-                System.out.println("Title verification passed: " + driver.findElement(By.linkText("Books")).getText());
-            } else {
-                System.out.println("Title verification failed!!!");
-            }
 
             driver.close();
 
